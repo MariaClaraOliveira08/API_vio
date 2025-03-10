@@ -14,6 +14,19 @@ module.exports = class userController {
     if(cpfValidation){
       return res.status(400).json(cpfValidation)
     }
+<<<<<<< HEAD
+
+      // Construção da query INSERT
+      const query = `INSERT INTO usuario (cpf, password, email, name, data_nascimento) VALUES(
+        '${cpf}', 
+        '${password}', 
+        '${email}', 
+        '${name}', 
+        '${data_nascimento}'
+      )`;
+
+=======
+>>>>>>> 038161ed5d4d20cf9e489f4686a985acda2fbc52
       //Executando a query criada
       try {
         connect.query(query, function (err) {
@@ -33,7 +46,7 @@ module.exports = class userController {
         console.error(error);
         res.status(500).json({ error: "Erro interno do servidor" });
       }
-    }
+    
   }
 
   static postLogin(req, res) {
@@ -81,7 +94,10 @@ module.exports = class userController {
   }
 
   static async updateUser(req, res) {
+<<<<<<< HEAD
+=======
     static async updateUser(req, res) {
+>>>>>>> 038161ed5d4d20cf9e489f4686a985acda2fbc52
     const { cpf, email, password, name, id } = req.body; 
     const validation = validateUser(req.body)
     if(validation){
@@ -92,8 +108,13 @@ module.exports = class userController {
       return res.status(400).json(cpfValidation)
     }
     const query = `UPDATE usuario SET nome=?,email=?,senha=?,cpf=? WHERE id_usuario = ?`;
+<<<<<<< HEAD
+    const values = [cpf, email, password, name, id];
+    
+=======
     const values = [name, email, password, cpf,id];
 
+>>>>>>> 038161ed5d4d20cf9e489f4686a985acda2fbc52
     try {
       connect.query(query, values, function (err, results) {
         if (err) {
