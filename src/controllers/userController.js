@@ -1,21 +1,19 @@
 const connect = require("../db/connect");
+const validateUser = require("../services/validateUser");
+const validateCpf = require("../services/validateCpf");
 
 module.exports = class userController {
   static async createUser(req, res) {
+
     const { cpf, email, password, name, data_nascimento } = req.body;
-
-    if (!cpf || !email || !password || !name || !data_nascimento) {
-      return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
-    } else if (isNaN(cpf) || cpf.length !== 11) {
-      return res.status(400).json({
-        error: "CPF inválido. Deve conter exatamente 11 dígitos numéricos",
-      });
-    } else if (!email.includes("@")) {
-      return res.status(400).json({ error: "Email inválido. Deve conter @" });
-    } else {
-      // Construção da query INSERT
-      const query = `INSERT INTO usuario (cpf, password, email, name, data_nascimento) VALUES('${cpf}', '${password}', '${email}', '${name}', '${data_nascimento}')`;
-
+    const validation = validateUser(req.body);
+    if(validation){
+      return res.status(400).json(validation)
+    }
+    const cpfValidation = await validateCpf(cpf,null)
+    if(cpfValidation){
+      return res.status(400).json(cpfValidation)
+    }
       //Executando a query criada
       try {
         connect.query(query, function (err) {
@@ -83,15 +81,18 @@ module.exports = class userController {
   }
 
   static async updateUser(req, res) {
-    const { cpf, email, password, name, data_nascimento } = req.body;
-
-    if (!cpf || !email || !password || !name || !data_nascimento) {
-      return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
+    static async updateUser(req, res) {
+    const { cpf, email, password, name, id } = req.body; 
+    const validation = validateUser(req.body)
+    if(validation){
+      return res.status(400).json(validation)
+    }
+    const cpfValidation = await validateCpf(cpf,id)
+    if(cpfValidation){
+      return res.status(400).json(cpfValidation)
     }
     const query = `UPDATE usuario SET nome=?,email=?,senha=?,cpf=? WHERE id_usuario = ?`;
-    const values = [name, email, password, cpf];
-    const userIndex = users.findIndex((user) => user.cpf === cpf);
-    
+    const values = [name, email, password, cpf,id];
 
     try {
       connect.query(query, values, function (err, results) {
