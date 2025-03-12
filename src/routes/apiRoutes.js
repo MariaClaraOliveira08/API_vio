@@ -10,7 +10,7 @@ const IngressoController = require('../controllers/ingressoController');
 // router.post('/user/login', userController.postLogin); 
 // router.get('/user/:cpf', userController.getUserById);
  router.put('/user/', userController.updateUser);
- router.delete('/user/:cpf', userController.deleteUser);
+ router.delete('/user/:id', userController.deleteUser);
  router.post('/login', userController.loginUser);
  //router.post('/cadastro', userController.cadastroUser);
 
