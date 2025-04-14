@@ -1,3 +1,4 @@
+
 delimiter //
 create procedure registrar_compra(
     in p_id_usuario int,
@@ -6,6 +7,10 @@ create procedure registrar_compra(
 )
 begin
     declare v_id_compra int;
+
+    end; //
+
+delimiter ;
 
 --criar registro na tabela compra
     insert into compra (data_compra, fk_id_usuario)
@@ -64,3 +69,34 @@ delimiter ;
 
 call registrar_presenca(1, 3);
 
+
+
+-- exercicio
+-- procedure para resumo do usuario
+delimiter $$
+
+create procedure resumo_usuario(in pid int)
+begin
+    declare nome varchar(100);
+    declare email varchar(100);
+    declare totalrs decimal(10,2);
+    declare faixa varchar(20);
+ 
+
+select u.name, u.email into nome, email
+from usuario u
+where u.id_usuario = pid;
+
+
+set totalrs = calcula_total_gasto(pid);
+set faixa = buscar_faixa_etaria_usuario(pid);
+
+
+select nome as nome_usuario,
+    email as email_usuario,
+    totalrs as total_gasto,
+    faixa as faixa_etaria;
+end; $$
+delimiter ;
+
+call resumo_usuario(1);
