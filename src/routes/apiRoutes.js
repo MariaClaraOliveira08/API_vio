@@ -30,6 +30,7 @@ router.get('/evento/data', eventoController.getEventosPorData); //rota do getEve
 
 //rotas ingressoController
 router.post('/ingresso', IngressoController.createIngresso);
+router.get('/ingresso/evento/:id', IngressoController.getByIdEvento);
 router.get('/ingresso', IngressoController.getAllIngresso);
 router.put('/ingresso', IngressoController.updateIngresso);
 router.delete('/ingresso/:id', IngressoController.deleteIngresso);
