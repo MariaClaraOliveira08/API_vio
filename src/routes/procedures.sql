@@ -8,24 +8,18 @@ create procedure registrar_compra(
 begin
     declare v_id_compra int;
 
-    end; //
-
-delimiter ;
-
---criar registro na tabela compra
-    insert into compra (data_compra, fk_id_usuario)
+insert into compra (data_compra, fk_id_usuario)
     values (now(), p_id_usuario);
 
---obter o ID compra recém criada
-    set v_id_compra = last_insert_id();
+set v_id_compra = last_insert_id();
 
---registrar os ingressos comprados
-    insert into ingresso_compra (fk_id_compra, fk_id_ingresso, quantidade)
-    values (v_id_compra, p_id_ingresso, p_quantidade);
+insert into ingresso_compra (fk_id_compra, fk_id_ingresso, quantidade)
+    values (v_id_compra, p_id_ingresso, p_quantidade); 
 
 end; //
-
 delimiter ;
+
+CALL registrar_compra(2, 10, 3);
 
 
 on ic.fk_id_compra = c.id_compra
