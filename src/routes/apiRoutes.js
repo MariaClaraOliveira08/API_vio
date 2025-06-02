@@ -4,6 +4,7 @@ const userController = require('../controllers/userController');
 const organizadorController = require('../controllers/organizadorController');
 const eventoController = require('../controllers/eventoController');
 const IngressoController = require('../controllers/ingressoController');
+const compraController = require('../controllers/compraController');
 
 //rotas userController
  router.post('/user', userController.createUser);
@@ -36,4 +37,9 @@ router.get('/ingresso', IngressoController.getAllIngresso);
 router.put('/ingresso', IngressoController.updateIngresso);
 router.delete('/ingresso/:id', IngressoController.deleteIngresso);
 router.get('/eventos/dia', eventoController.getEventosNosProximos7Dias);
+
+//compraController
+router.post('/comprasimples', compraController.registrarCompraSimples);
+router.post('/compra', compraController.registrarCompra);
+
 module.exports = router;

@@ -19,7 +19,7 @@ RUN npm install
 COPY  . .
 
 ## Container ficará ouvindo os acessos na porta 5000
-EXPOSE 5001
+EXPOSE 5000
 
 ## Executa o comando para iniciar o script que está no package.json
 CMD npm start

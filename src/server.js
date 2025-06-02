@@ -11,4 +11,4 @@ const corsOptions = {
 
 // Aplicando o middleware CORS no app
 app.use(cors(corsOptions));
-app.listen(5001);
+app.listen(5000);
