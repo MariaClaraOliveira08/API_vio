@@ -40,6 +40,9 @@ router.get('/eventos/dia', eventoController.getEventosNosProximos7Dias);
 
 //compraController
 router.post('/comprasimples', compraController.registrarCompraSimples);
+// http://localhost:5000/api/v1/comprasimples
+
 router.post('/compra', compraController.registrarCompra);
+// http://localhost:5000/api/v1/compra
 
 module.exports = router;
