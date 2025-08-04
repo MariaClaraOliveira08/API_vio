@@ -5,6 +5,7 @@ const organizadorController = require('../controllers/organizadorController');
 const eventoController = require('../controllers/eventoController');
 const IngressoController = require('../controllers/ingressoController');
 const compraController = require('../controllers/compraController');
+const upload = require("../services/upload");
 
 //rotas userController
  router.post('/user', userController.createUser);
@@ -24,6 +25,7 @@ router.put('/organizador', organizadorController.updateOrganizador);
 router.delete('/organizador/:id', organizadorController.deleteOrganizador);
 
 //rotas eventoController
+router.post('/evento', upload.single("imagem"), eventoController.createEvento); 
 router.post('/evento', eventoController.createEvento);
 router.get('/evento',verifyJWT, eventoController.getAllEventos);
 router.put('/evento', eventoController.updateEvento);
@@ -36,7 +38,7 @@ router.get('/ingresso/evento/:id', IngressoController.getByIdEvento);
 router.get('/ingresso', IngressoController.getAllIngresso);
 router.put('/ingresso', IngressoController.updateIngresso);
 router.delete('/ingresso/:id', IngressoController.deleteIngresso);
-router.get('/eventos/dia', eventoController.getEventosNosProximos7Dias);
+//router.get('/eventos/dia', eventoController.getEventosNosProximos7Dias);
 
 //compraController
 router.post('/comprasimples', compraController.registrarCompraSimples);
