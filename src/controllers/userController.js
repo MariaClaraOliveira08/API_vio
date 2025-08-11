@@ -162,7 +162,6 @@ module.exports = class userController {
 
          //Comparar a senha enviada na requisição com o hash do banco
         const passwordOK =  bcrypt.compareSync(password, user.password);
-
         if (!passwordOK) {
           return res.status(401).json({ error: "Senha incorreta" });
         }

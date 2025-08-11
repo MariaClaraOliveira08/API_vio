@@ -25,6 +25,7 @@ router.put('/organizador', organizadorController.updateOrganizador);
 router.delete('/organizador/:id', organizadorController.deleteOrganizador);
 
 //rotas eventoController
+router.get("/evento/imagem/:id", eventoController.getImagemEvento);
 router.post('/evento', upload.single("imagem"), eventoController.createEvento); 
 router.post('/evento', eventoController.createEvento);
 router.get('/evento',verifyJWT, eventoController.getAllEventos);
