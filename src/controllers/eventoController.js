@@ -15,7 +15,7 @@ module.exports = class eventoController {
         .json({ error: "Todos os campos devem ser preenchidos!" });
     }
 
-    const query = `INSERT into evento (nome, descricao, data_hora, local, fk_id_organizador, imagem) values (?,?,?,?,?,?,?)`;
+    const query = `INSERT into evento (nome, descricao, data_hora, local, fk_id_organizador, imagem, tipo_imagem) values (?,?,?,?,?,?,?)`;
     const values = [nome, descricao, data_hora, local, fk_id_organizador, imagem,tipoImagem];
     try {
       connect.query(query, values, (err) => {
